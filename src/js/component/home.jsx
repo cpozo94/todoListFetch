@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import propTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -18,6 +20,7 @@ const Nuevo = (e) => {
 
 
 const handleKey = (event) => {
+	console.log("handleKey", event.key);
     if (event.key === 'Enter') {
 		//copiamos el array anterior y añadimos un elemento nuevo, mirar el deatlle de añadir un array
       setTodoList([...todoList,todo]);
@@ -26,15 +29,20 @@ const handleKey = (event) => {
     }
   };
 
+  const deleteItem = () => {
+
+  }
+
+
 
 
 	return (
 		<div className="container">
-			<h1>Todo List</h1>
-			<input type="text" placeholder="Enter todo" onChange={Nuevo} onKeyPress={handleKey} value={todo}  />
-			<ul>
+			<h1 className="title">Todo List</h1>
+			<input className="form-control" type="text" placeholder="Add task" onChange={Nuevo} onKeyPress={handleKey} value={todo}  />
+			<ul className="list-group">
 			{todoList.map((item) => {
-        return <li>{item} <i className="fa-trash"></i></li>;
+        return <li className="list-group-item"  >{item} <i> <FontAwesomeIcon icon={faTrash}/></i></li>;
       })}
 			</ul>
 			<p>{todoList.length} items left</p>

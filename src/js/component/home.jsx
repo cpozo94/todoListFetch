@@ -10,8 +10,8 @@ const Home = (props) => {
 const [todo, setTodo] = useState("");
 const [todoList, setTodoList] = useState([]);
 
+
 const Nuevo = (e) => {
-	//setTodo(e.target.value)
 	  setTodo(e.target.value)
 };
 
@@ -19,10 +19,10 @@ const Nuevo = (e) => {
 
 const handleKey = (event) => {
     if (event.key === 'Enter') {
+		//copiamos el array anterior y añadimos un elemento nuevo, mirar el deatlle de añadir un array
       setTodoList([...todoList,todo]);
 	  setTodo("")
 
-	  
     }
   };
 

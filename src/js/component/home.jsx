@@ -21,13 +21,14 @@ const Nuevo = (e) => {
 
 
 const handleKey = (event) => {
-    if (event.key === 'Enter') {
-		//copiamos el array anterior y añadimos un elemento nuevo, mirar el deatlle de añadir un array
-      setTodoList([...todoList,todo]);
-	  setTodo("")
-
-    }
+	if (event.key === 'Enter' && event.target.value !== "") {
+	  // Si la tecla presionada es 'Enter' y el valor del campo de entrada no está vacío
+	  // Se agrega el nuevo elemento al final de todoList y se limpia el campo de entrada
+	  setTodoList([...todoList, todo]);
+	  setTodo('');
+	}
   };
+  
 
 
 //   onClick={{}=>setTodoList(todoList.filter((t,currentIndex)=> index != currentIndex))}

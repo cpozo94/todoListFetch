@@ -18,12 +18,9 @@ const Pendiente = (props) => {
           return (
             <li className="list-group-item" key={i}>
               {item} <FontAwesomeIcon icon={faCheck} onClick={() =>
-                  props.setTodoList(
-                    props.todoList.filter(
-                      (item, currentIndex) => i !== currentIndex
-                    )
-                  )
-                } />
+    tareaHecha(i)
+} />
+
               <FontAwesomeIcon
                 icon={faTrash}
                 onClick={() =>

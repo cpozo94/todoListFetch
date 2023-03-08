@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTasks, faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 
-const Tarea = () =>{
+const Tarea = (props) =>{
 
     const [todo, setTodo] = useState("");
 const [todoList, setTodoList] = useState([]);
@@ -25,15 +25,25 @@ const handleKey = (event) => {
 	}
   };
 
+  const tareaHecha = ()=> {
+	
+	props.setTodoList(
+		props.todoList.filter(
+		  (item, currentIndex) => i == currentIndex
+		)
+	  )
+
+  }
+
 
 return (
 <div className="col">
 			<h1 className="title"> Hecho</h1>
 			<ul className="list-group">
-			{todoList.map((item,i) => {
+			{props.todoList.map((item,i) => {
 				//key sería el elemento único de cada lista, su identificador.
 				return <li className="list-group-item" key={i}  >{item}  </li>;
-                props.setTodoList
+                
       })}       
 			</ul>
 			<div className="items-left">

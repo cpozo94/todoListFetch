@@ -44,7 +44,7 @@ const handleKey = (event) => {
 		</div>
 
 		<Pendiente todoList={todoList} setTodoList={setTodoList}/>
-		<Tarea setTodoList={setTodoList}/>
+		<Tarea todoList={todoList} setTodoList={setTodoList}/>
 		
 
 		</div>

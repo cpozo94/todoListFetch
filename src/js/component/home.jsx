@@ -26,14 +26,16 @@ const Home = () => {
     const newTodoList = [...todoList, newTaskObject];
     await editListTask(newTodoList);
     getTodoList();
-    setLoading(true);
+    setLoading(false);
     
   };
 
   const deleteTask = async (taskIndex) => {
+    setLoading(true);
     const newTodoList = todoList.filter((_, index) => index !== taskIndex);
     await editListTask(newTodoList);
     getTodoList();
+    setLoading(false);
   };
 
   const handleKey = (event) => {

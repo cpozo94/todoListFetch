@@ -46,7 +46,7 @@ const Home = () => {
         ></input>
         <button onClick={addTask}>save</button>
       </div>
-      <h1>hola</h1>
+    
       {todoList.length ? (
         todoList.map((todo, index) => (
           <div key={index}>

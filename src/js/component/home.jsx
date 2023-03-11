@@ -1,63 +1,82 @@
-import React, { useState } from "react";
-import propTypes from "prop-types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTasks, faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
-import Tarea from "./tarea.jsx";
-import Pendiente from "./pendiente.jsx";
+import React, { useState, useEffect } from "react";
 
+// include images into your bundle
+import rigoImage from "../../img/rigo-baby.jpg";
 
-
-
+// create your first component
 const Home = () => {
+  const [todo, setTodo] = useState("");
+  const [tasks, setTasks] = useState([]);
 
+//   useEffect(() => {
+//     fetch("https://assets.breatheco.de/apis/fake/todos/user/pozo", {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json"
+//       }
+//     })
+//       .then((resp) => {
+//         console.log(resp);
+//         console.log(resp.ok); // Dará true si está correcto
+//         console.log(resp.status);
+//         return resp.json();
+//       })
+//       .then((data) => {
+//         setTasks(data);
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   }, []);
 
-const [todo, setTodo] = useState("");
-const [todoList, setTodoList] = useState([]);
+  const addTask = (newTask) => {
+    setTasks([...tasks, newTask]);
 
-
-const Nuevo = (e) => {
-	
-	  setTodo(e.target.value)
-};
-
-
-
-const handleKey = (event) => {
-	if (event.key === 'Enter' && event.target.value !== "") {
-	  // Si la tecla presionada es 'Enter' y el valor del campo de entrada no está vacío.
-	  // Se agrega el nuevo elemento al final de todoList.
-	  setTodoList([...todoList, todo]);
-	  //y se limpia el campo de entrada.
-	  setTodo('');
-	}
+    
   };
+
+  const editList = () => {
+    fetch("https://assets.breatheco.de/apis/fake/todos/user/pozo", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(tasks)
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+
   
+  const handleKey = (event) => {
+    if (event.key === "Enter" && todo !== "") {
+      const newTask = { label: todo, done: false };
+      addTask(newTask);
+      setTodo("");
+    }
+  };
 
-	return (
-		
-		<div className="container text-center">
-			<div className="row">
-			<div className="col">
-			<h1 className="title">Todo List</h1>
-			<input className="form-control" type="text" placeholder="Add task" onChange={Nuevo} onKeyPress={handleKey} value={todo}  />
-			
-		</div>
-
-		<Pendiente todoList={todoList} setTodoList={setTodoList}/>
-		<Tarea todoList={todoList} setTodoList={setTodoList}/>
-		
-
-		</div>
-
-		</div>
-		
-	);
+  return (
+    <div className="text-center">
+      <h1>hola</h1>
+      {tasks.map((task, index) => (
+        <p key={index}>{task.label}</p>
+      ))}
+      <input
+        className="form-control"
+        type="text"
+        placeholder="Add task"
+        value={todo}
+        onChange={(e) => setTodo(e.target.value)}
+        onKeyDown={handleKey}
+      />
+    </div>
+  );
 };
 
 export default Home;
-
-
-//hacer nueva lista de tareas que se pueda marcar como hecha.
-//guardarlo como un ojbeto, en el setTasklist, generas un objeto {id: }}
-//mirar hacer otro elemento para borrar el elemento de la tarea, 
-//crear un estado (un array), cuando se meta 

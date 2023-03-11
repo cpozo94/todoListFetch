@@ -35,11 +35,9 @@ export const getTask = async () => {
 
 export const editListTask = async (todoList) => {
     try {
-        console.log(todoList)
         const res = await fetch (URL, {method: "PUT",
         body:JSON.stringify(todoList), 
         headers: HEADERS})
-        console.log(res)
 
     }catch (err){
         console.log("error",err)

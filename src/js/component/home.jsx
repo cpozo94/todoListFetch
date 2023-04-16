@@ -3,6 +3,9 @@ import { getTask, editListTask } from "./sevice/index.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTasks, faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
 
+
+
+
 const Home = () => {
   const [todoList, setTodoList] = useState([]);
   const [newTodo, setNewTodo] = useState("");
@@ -57,7 +60,7 @@ const Home = () => {
               onChange={(e) => setNewTodo(e.target.value)}
               onKeyPress={handleKey}
             ></input>
-            <button onClick={addTask}>save</button>
+            
           </div>
 
           {loading ? ( // agregamos una condición para mostrar el spinner
@@ -67,15 +70,15 @@ const Home = () => {
           ) : (
             todoList.length ? (
               todoList.map((todo, index) => (
-                <li className="list-group.item" key={index}>
-                  <p>
+                <ul className="list-group.item" key={index}>
+                  <li class="list-group-item">
                     <FontAwesomeIcon
                       icon={faTrash}
                       onClick={() => deleteTask(index)}
                     />
                     {todo.label}
-                  </p>
-                </li>
+                  </li>
+                </ul>
               ))
             ) : (
               <p>No tasks yet.</p>

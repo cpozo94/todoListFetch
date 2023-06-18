@@ -47,10 +47,12 @@ const Home = () => {
     updatedTodoList[taskIndex].done = !updatedTodoList[taskIndex].done;
   
     if (updatedTodoList[taskIndex].done) {
-      const currentTime = new Date().toLocaleTimeString(); // Get the current time
-      updatedTodoList[taskIndex].completedTime = currentTime; // Add the completed time to the task
+      const currentDate = new Date().toLocaleDateString(); 
+      const currentTime = new Date().toLocaleTimeString(); 
+      const completedDateTime = `${currentDate} ${currentTime}`;
+      updatedTodoList[taskIndex].completedTime = completedDateTime; s
     } else {
-      updatedTodoList[taskIndex].completedTime = null; // Clear the completed time if the task is marked as not done
+      updatedTodoList[taskIndex].completedTime = null; 
     }
   
     await editListTask(updatedTodoList);
@@ -71,7 +73,7 @@ const Home = () => {
     <div className="container text-center">
       <div className="row">
         <div className="col">
-          <h1 className="title">Todo List</h1>
+          <h1 className="title">Lista de Tareas</h1>
 
           <div>
             <input
@@ -98,7 +100,7 @@ const Home = () => {
                   {todo.label}
                   {todo.completedTime && (
                     <span className="completed-time">
-                       Tarea completada a las {todo.completedTime}
+                       Tarea completada el día {todo.completedTime}
                     </span>
                   )}
                   <FontAwesomeIcon

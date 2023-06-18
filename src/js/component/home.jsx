@@ -45,10 +45,19 @@ const Home = () => {
     setLoading(true);
     const updatedTodoList = [...todoList];
     updatedTodoList[taskIndex].done = !updatedTodoList[taskIndex].done;
+  
+    if (updatedTodoList[taskIndex].done) {
+      const currentTime = new Date().toLocaleTimeString(); // Get the current time
+      updatedTodoList[taskIndex].completedTime = currentTime; // Add the completed time to the task
+    } else {
+      updatedTodoList[taskIndex].completedTime = null; // Clear the completed time if the task is marked as not done
+    }
+  
     await editListTask(updatedTodoList);
     setTodoList(updatedTodoList);
     setLoading(false);
   };
+  
 
   const handleKey = (event) => {
     if (event.key === "Enter" && event.target.value !== "") {
@@ -80,13 +89,18 @@ const Home = () => {
           ) : todoList.length ? (
             todoList.map((todo, index) => (
               <ul className="list-group.item" key={index}>
-                <li className="list-group-item">
+                <li className={`list-group-item ${todo.done ? "completed" : ""}`}>
                   <FontAwesomeIcon
                     icon={faCheck}
                     onClick={() => toggleTask(index)}
                     style={{ color: todo.done ? "green" : "inherit" }}
                   />
                   {todo.label}
+                  {todo.completedTime && (
+                    <span className="completed-time">
+                       Tarea completada a las {todo.completedTime}
+                    </span>
+                  )}
                   <FontAwesomeIcon
                     icon={faTrash}
                     onClick={() => deleteTask(index)}
@@ -95,6 +109,7 @@ const Home = () => {
                 </li>
               </ul>
             ))
+            
           ) : (
             <p>No tasks yet.</p>
           )}

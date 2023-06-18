@@ -41,11 +41,21 @@ const Home = () => {
     setLoading(false);
   };
 
+  const toggleTask = async (taskIndex) => {
+    setLoading(true);
+    const updatedTodoList = [...todoList];
+    updatedTodoList[taskIndex].done = !updatedTodoList[taskIndex].done;
+    await editListTask(updatedTodoList);
+    setTodoList(updatedTodoList);
+    setLoading(false);
+  };
+
   const handleKey = (event) => {
     if (event.key === "Enter" && event.target.value !== "") {
       addTask();
     }
   };
+
 
   return (
     <div className="container text-center">
@@ -60,29 +70,32 @@ const Home = () => {
               onChange={(e) => setNewTodo(e.target.value)}
               onKeyPress={handleKey}
             ></input>
-            
           </div>
 
-          {loading ? ( // agregamos una condición para mostrar el spinner
+          {loading ? (
             <div className="spinner-border" role="status">
               <span className="visually-hidden">Loading...</span>
             </div>
+          ) : todoList.length ? (
+            todoList.map((todo, index) => (
+              <ul className="list-group.item" key={index}>
+                <li className="list-group-item">
+                  <FontAwesomeIcon
+                    icon={faCheck}
+                    onClick={() => toggleTask(index)}
+                    style={{ color: todo.done ? "green" : "inherit" }}
+                  />
+                  {todo.label}
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    onClick={() => deleteTask(index)}
+                    className="ml-auto"
+                  />
+                </li>
+              </ul>
+            ))
           ) : (
-            todoList.length ? (
-              todoList.map((todo, index) => (
-                <ul className="list-group.item" key={index}>
-                  <li class="list-group-item">
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      onClick={() => deleteTask(index)}
-                    />
-                    {todo.label}
-                  </li>
-                </ul>
-              ))
-            ) : (
-              <p>No tasks yet.</p>
-            )
+            <p>No tasks yet.</p>
           )}
         </div>
       </div>

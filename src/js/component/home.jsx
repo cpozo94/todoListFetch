@@ -49,8 +49,8 @@ const Home = () => {
     if (updatedTodoList[taskIndex].done) {
       const currentDate = new Date().toLocaleDateString(); 
       const currentTime = new Date().toLocaleTimeString(); 
-      const completedDateTime = `${currentDate} ${currentTime}`;
-      updatedTodoList[taskIndex].completedTime = completedDateTime; s
+      const completedDateTime = `${currentDate} ${currentTime}`; 
+      updatedTodoList[taskIndex].completedTime = completedDateTime; 
     } else {
       updatedTodoList[taskIndex].completedTime = null; 
     }

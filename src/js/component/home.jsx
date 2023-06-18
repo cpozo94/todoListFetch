@@ -53,6 +53,7 @@ const Home = () => {
   const handleKey = (event) => {
     if (event.key === "Enter" && event.target.value !== "") {
       addTask();
+      event.target.value = ""; // Clear the input value
     }
   };
 
